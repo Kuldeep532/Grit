@@ -135,41 +135,62 @@ fun TaskCard(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth().padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp),
                 ) {
-                    Column(modifier = Modifier.weight(1f)) {
+                    Icon(
+                        imageVector = vectorResource(
+                            if (taskWithSubTasks.task.status) Res.drawable.check_circle
+                            else Res.drawable.circle_border
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                        tint = if (taskWithSubTasks.task.status) colorScheme.primary
+                            else colorScheme.onSurfaceVariant,
+                    )
+
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
                         Text(
                             text = taskWithSubTasks.task.title,
-                            style = typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                            textDecoration =
-                                if (taskWithSubTasks.task.status) {
-                                    TextDecoration.LineThrough
-                                } else {
-                                    TextDecoration.None
-                                },
+                            style = typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                            textDecoration = if (taskWithSubTasks.task.status) {
+                                TextDecoration.LineThrough
+                            } else {
+                                TextDecoration.None
+                            },
                         )
 
-                        if (taskWithSubTasks.task.reminder != null) {
+                        if (taskWithSubTasks.task.reminder != null || taskWithSubTasks.subTasks.isNotEmpty()) {
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
                             ) {
-                                Icon(
-                                    imageVector = vectorResource(Res.drawable.alarm),
-                                    contentDescription = "Reminder",
-                                    modifier = Modifier.size(12.dp),
-                                )
-
-                                Text(
-                                    text =
-                                        taskWithSubTasks.task.reminder!!.toFormattedString(is24Hr),
-                                    style =
-                                        typography.labelSmall.copy(
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.Light,
-                                        ),
-                                )
+                                if (taskWithSubTasks.task.reminder != null) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(5.dp),
+                                    ) {
+                                        Icon(
+                                            imageVector = vectorResource(Res.drawable.alarm),
+                                            contentDescription = "Reminder",
+                                            modifier = Modifier.size(14.dp),
+                                        )
+                                        Text(
+                                            text = taskWithSubTasks.task.reminder!!.toFormattedString(is24Hr),
+                                            style = typography.labelMedium,
+                                        )
+                                    }
+                                }
+                                if (taskWithSubTasks.subTasks.isNotEmpty()) {
+                                    Text(
+                                        text = "${taskWithSubTasks.subTasks.count { it.status }}/${taskWithSubTasks.subTasks.size} subtasks",
+                                        style = typography.labelMedium,
+                                        color = colorScheme.onSurfaceVariant,
+                                    )
+                                }
                             }
                         }
                     }
