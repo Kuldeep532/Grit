@@ -44,6 +44,7 @@ import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
 import org.koin.core.annotation.Single
 
 @Single(binds = [AppNotificationManager::class])
@@ -71,7 +72,8 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
 
     suspend fun announceReminder(title: String) {
-        withContext(Dispatchers.Main.immediate) {
+        withTimeout(7_000) {
+            withContext(Dispatchers.Main.immediate) {
             suspendCancellableCoroutine { continuation ->
                 var speechEngine: TextToSpeech? = null
                 val finished = AtomicBoolean(false)
@@ -114,9 +116,9 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
 
                         val announcement =
                             if (isHindi && canUseRequestedLanguage) {
-                                "अब $title का समय हो गया है।"
+                                "अब ${title.take(60)} का समय हो गया है।"
                             } else {
-                                "It's time for $title."
+                                "It's time for ${title.take(60)}."
                             }
 
                         engine.setSpeechRate(0.95f)
@@ -147,6 +149,7 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
                         }
                     }
             }
+        }
         }
     }
 
