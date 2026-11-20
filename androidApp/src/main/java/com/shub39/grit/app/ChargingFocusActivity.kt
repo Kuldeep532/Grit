@@ -38,9 +38,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
+import androidx.activity.ComponentActivity
 
-class ChargingFocusActivity : FragmentActivity() {
+class ChargingFocusActivity : ComponentActivity() {
     private val unplugReceiver =
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
