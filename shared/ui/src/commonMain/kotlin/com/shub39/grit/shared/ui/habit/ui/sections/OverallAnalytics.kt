@@ -149,7 +149,7 @@ fun OverallAnalytics(
     ) { padding ->
         val maxWidth = windowSizeClass.getGridMinWidth()
         LazierGrid(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
             columns = StaggeredGridCells.Adaptive(minSize = maxWidth),
             contentPadding = padding,
             horizontalArrangement = Arrangement.spacedBy(16.dp),
