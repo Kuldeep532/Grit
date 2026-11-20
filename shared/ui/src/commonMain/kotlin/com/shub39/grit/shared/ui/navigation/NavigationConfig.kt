@@ -45,13 +45,17 @@ data object SettingsHome : Routes
 
 data object About : Routes
 
+data object PrivacyPolicy : Routes
+
+data object TermsAndConditions : Routes
+
 data object Changelog : Routes
 
 data object Backup : Routes
 
 data object LookAndFeel : Routes
 
-private val SETTINGS_ROUTES = listOf(About, Backup, Changelog, LookAndFeel, SettingsHome)
+private val SETTINGS_ROUTES = listOf(About, Backup, Changelog, LookAndFeel, PrivacyPolicy, TermsAndConditions, SettingsHome)
 private val HABIT_ROUTES =
     listOf(HabitAnalytics, HabitsList, OverallAnalytics, Calendar, CalendarHeatMap)
 
