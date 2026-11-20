@@ -21,7 +21,7 @@ You are responsible for protecting your device and keeping copies of important e
 
 ## Notifications, Charging Focus and device compatibility
 
-Reminder delivery and Charging Focus prompts depend on Android settings, battery restrictions and notification permissions. Charging Focus shows a black screen only inside its own app screen; it does not lock the whole phone, block other apps or replace the phone's emergency features. Android navigation and system controls remain available. Voice announcements also depend on speech voices installed on your device. Delivery cannot be guaranteed in every circumstance.
+Reminder delivery and Charging Focus prompts depend on Android settings, battery restrictions and notification permissions. Charging Focus is a voluntary motivational screen that may be opened from its charging reminder. It does not lock the whole phone, block other apps or replace the phone's emergency features. Android navigation and system controls remain available. Voice announcements also depend on speech voices installed on your device. Delivery cannot be guaranteed in every circumstance.
 
 ## Open-source license
 
