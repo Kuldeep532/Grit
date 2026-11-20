@@ -30,6 +30,12 @@
         android:name=".app.GritApplication"
         tools:targetApi="31">
         <activity
+            android:name=".app.ChargingFocusActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.Grit" />
+
+        <activity
             android:name=".app.MainActivity"
             android:launchMode="standard"
             android:exported="true"
@@ -41,6 +47,16 @@
         </activity>
 
         <receiver android:name=".core.data.GritIntentReceiver" />
+
+        <receiver
+            android:name=".core.data.ChargingFocusReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
 
         <receiver android:name=".core.data.BootReceiver"
             android:exported="true">
