@@ -242,7 +242,7 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                                     ),
                             )
                             Text(
-                                text = "Developer",
+                                text = "Developed by",
                                 style =
                                     MaterialTheme.typography.titleSmall.copy(
                                         color = MaterialTheme.colorScheme.tertiary
