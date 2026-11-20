@@ -42,3 +42,7 @@ Features may change, be suspended or be discontinued. The app is provided on an 
 ## Contact
 
 For questions, use the contact or issue options on the [official project page](https://github.com/Kuldeep532/Grit).
+
+## Content Protection limitations
+
+Content Protection is an optional domain-based filter. It may block known adult website domains, but it cannot guarantee that all adult content is detected or blocked. It does not inspect individual pages, images or videos, and some apps or websites may use encrypted DNS or other methods that bypass domain filtering. Android allows only one active VPN connection at a time, so using another VPN may turn off or replace this protection. You remain responsible for reviewing the filter's status and choosing whether to use it.
