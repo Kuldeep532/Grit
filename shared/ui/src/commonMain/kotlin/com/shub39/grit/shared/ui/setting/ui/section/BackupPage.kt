@@ -82,7 +82,7 @@ fun BackupPage(
             )
         },
     ) { padding ->
-        LazierColumn(modifier = Modifier.fillMaxSize(), contentPadding = padding) {
+        LazierColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp), contentPadding = padding) {
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     Column(modifier = Modifier.clip(leadingItemShape())) {
