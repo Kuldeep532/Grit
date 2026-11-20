@@ -23,9 +23,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
@@ -38,8 +38,8 @@ import com.shub39.grit.core.interfaces.IntentActions
 import com.shub39.grit.core.tasks.SubTask
 import com.shub39.grit.core.tasks.Task
 import java.util.Locale
-import java.util.concurrent.atomic.AtomicBoolean
 import java.util.UUID
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
