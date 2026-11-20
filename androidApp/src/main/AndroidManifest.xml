@@ -32,7 +32,6 @@
         <activity
             android:name=".app.ChargingFocusActivity"
             android:exported="false"
-            android:excludeFromRecents="true"
             android:theme="@style/Theme.Grit" />
 
         <activity
