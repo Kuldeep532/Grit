@@ -107,7 +107,7 @@ fun LookAndFeelPage(
             )
         },
     ) { padding ->
-        LazierColumn(modifier = Modifier.fillMaxSize(), contentPadding = padding) {
+        LazierColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp), contentPadding = padding) {
             item {
                 // appTheme picker
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
