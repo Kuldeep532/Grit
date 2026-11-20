@@ -187,9 +187,10 @@ fun HabitUpsertSheetContent(
         padding = 0.dp,
         modifier = modifier.imePadding(),
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
         ) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -219,12 +220,12 @@ fun HabitUpsertSheetContent(
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth().clip(MaterialTheme.shapes.large),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 28.dp),
         ) {
             item {
-                Column {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     // title
                     OutlinedTextField(
                         state = titleTextFieldState,
@@ -522,7 +523,7 @@ fun HabitUpsertSheetContent(
                         onDismissRequest()
                     },
                     modifier =
-                        Modifier.padding(bottom = 32.dp)
+                        Modifier.padding(top = 4.dp, bottom = 20.dp)
                             .height(ButtonDefaults.MediumContainerHeight)
                             .fillMaxWidth(),
                     enabled =
