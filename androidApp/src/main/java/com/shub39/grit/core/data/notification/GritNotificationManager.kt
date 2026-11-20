@@ -71,7 +71,13 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
 
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
 
-    suspend fun announceReminder(title: String) {
+    enum class ReminderKind {
+        TASK,
+        SUBTASK,
+        HABIT,
+    }
+
+    suspend fun announceReminder(title: String, kind: ReminderKind) {
         withTimeout(7_000) {
             withContext(Dispatchers.Main.immediate) {
                 suspendCancellableCoroutine { continuation ->
