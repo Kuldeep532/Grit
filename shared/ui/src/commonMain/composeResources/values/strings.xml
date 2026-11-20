@@ -56,6 +56,8 @@
     <string name="pause_notifications_desc">Pause all app notifications</string>
     <string name="voice_announcements">Voice Announcements</string>
     <string name="voice_announcements_desc">Hear task, step, and habit reminders in your app language using your phone’s available voice.</string>
+    <string name="charging_focus">Charging Focus</string>
+    <string name="charging_focus_desc">Get a gentle reminder to take a break while your phone is charging.</string>
     <string name="started_on">Started on</string>
     <string name="weekly_graph">Weekly Comparison</string>
     <string name="not_enough_data">Not enough data</string>
