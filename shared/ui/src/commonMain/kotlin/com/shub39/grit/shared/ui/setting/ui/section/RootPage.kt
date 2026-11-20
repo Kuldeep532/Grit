@@ -17,6 +17,7 @@
 package com.shub39.grit.shared.ui.setting.ui.section
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -37,6 +38,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewWrapper
@@ -104,7 +107,19 @@ fun RootPage(
             ) {
                 // General settings
                 item {
-                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = "DAILY EXPERIENCE",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(start = 12.dp, bottom = 2.dp),
+                        )
+                        Column(
+                            modifier = Modifier.clip(RoundedCornerShape(24.dp))
+                                .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                                .padding(6.dp),
+                            verticalArrangement = Arrangement.spacedBy(2.dp),
+                        ) {
                         ListItem(
                             content = {
                                 Text(text = stringResource(Res.string.pause_notifications))
@@ -220,7 +235,19 @@ fun RootPage(
 
                 // look and feel customizations
                 item {
-                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = "PERSONALIZE",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(start = 12.dp, bottom = 2.dp),
+                        )
+                        Column(
+                            modifier = Modifier.clip(RoundedCornerShape(24.dp))
+                                .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                                .padding(6.dp),
+                            verticalArrangement = Arrangement.spacedBy(2.dp),
+                        ) {
                         ListItem(
                             modifier =
                                 Modifier.clip(leadingItemShape()).clickable {
@@ -271,7 +298,19 @@ fun RootPage(
 
                 // Changelogs
                 item {
-                    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(
+                            text = "ABOUT NEXUS LIFE",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(start = 12.dp, bottom = 2.dp),
+                        )
+                        Column(
+                            modifier = Modifier.clip(RoundedCornerShape(24.dp))
+                                .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                                .padding(6.dp),
+                            verticalArrangement = Arrangement.spacedBy(2.dp),
+                        ) {
                         ListItem(
                             colors = listItemColors(),
                             leadingContent = {
