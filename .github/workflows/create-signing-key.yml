@@ -1,0 +1,56 @@
+name: Create Nexus Life Signing Key
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  create-signing-key:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check export password
+        env:
+          EXPORT_PASSWORD: ${{ secrets.KEYSTORE_EXPORT_PASSWORD }}
+        run: |
+          if [ -z "$EXPORT_PASSWORD" ]; then
+            echo "Add KEYSTORE_EXPORT_PASSWORD in repository Actions secrets before running this workflow."
+            exit 1
+          fi
+          if [ "${#EXPORT_PASSWORD}" -lt 16 ]; then
+            echo "Use a long password of at least 16 characters."
+            exit 1
+          fi
+
+      - name: Generate Android signing key
+        env:
+          EXPORT_PASSWORD: ${{ secrets.KEYSTORE_EXPORT_PASSWORD }}
+        run: |
+          set -euo pipefail
+          keytool -genkeypair -v \
+            -keystore "$RUNNER_TEMP/nexus-life-upload.jks" \
+            -storetype JKS \
+            -storepass "$EXPORT_PASSWORD" \
+            -keypass "$EXPORT_PASSWORD" \
+            -alias nexuslife \
+            -keyalg RSA -keysize 4096 -validity 10000 \
+            -dname "CN=Nexus Life, OU=Android, O=Nexus Life, L=Unknown, ST=Unknown, C=IN"
+          openssl enc -aes-256-cbc -salt -pbkdf2 -iter 200000 \
+            -in "$RUNNER_TEMP/nexus-life-upload.jks" \
+            -out "$RUNNER_TEMP/nexus-life-upload.jks.enc" \
+            -pass env:EXPORT_PASSWORD
+          rm -f "$RUNNER_TEMP/nexus-life-upload.jks"
+
+      - name: Upload encrypted signing key
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-life-signing-key-encrypted
+          path: ${{ runner.temp }}/nexus-life-upload.jks.enc
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Remove temporary signing files
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/nexus-life-upload.jks" "$RUNNER_TEMP/nexus-life-upload.jks.enc"
