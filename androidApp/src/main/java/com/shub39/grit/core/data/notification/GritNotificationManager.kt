@@ -81,8 +81,8 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     }
 
     suspend fun announceReminder(title: String, kind: ReminderKind) {
-        speechMutex.withLock {
-            withTimeout(7_000) {
+        withTimeout(7_000) {
+            speechMutex.withLock {
                 withContext(Dispatchers.Main.immediate) {
                     suspendCancellableCoroutine { continuation ->
                         var speechEngine: TextToSpeech? = null
