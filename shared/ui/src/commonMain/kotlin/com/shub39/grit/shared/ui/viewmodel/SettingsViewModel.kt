@@ -180,6 +180,14 @@ class SettingsViewModel(
                     }
                 }
 
+                is ChangeVoiceAnnouncements -> {
+                    analytics.trackEvent(
+                        AnalyticsEvent.SETTINGS_UPDATED,
+                        mapOf("setting" to "ChangeVoiceAnnouncements", "value" to action.pref),
+                    )
+                    settingsDatastore.setVoiceAnnouncements(action.pref)
+                }
+
                 is ChangePauseNotifications -> {
                     analytics.trackEvent(
                         AnalyticsEvent.SETTINGS_UPDATED,
@@ -254,6 +262,11 @@ class SettingsViewModel(
                 settingsDatastore
                     .getNotificationsFlow()
                     .onEach { pref -> _state.update { it.copy(pauseNotifications = pref) } }
+                    .launchIn(this)
+
+                settingsDatastore
+                    .getVoiceAnnouncementsFlow()
+                    .onEach { pref -> _state.update { it.copy(voiceAnnouncements = pref) } }
                     .launchIn(this)
 
                 themeDatastore
