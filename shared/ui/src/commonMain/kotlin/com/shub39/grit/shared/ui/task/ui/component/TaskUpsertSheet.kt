@@ -30,6 +30,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ButtonShapes
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
@@ -139,10 +141,14 @@ fun TaskUpsertSheetContent(
         onDismissRequest = onDismissRequest,
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
         ) {
-            Box(
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(14.dp),
+            ) {
+                Box(
                 contentAlignment = Alignment.Center,
                 modifier =
                     Modifier.size(48.dp)
@@ -164,15 +170,20 @@ fun TaskUpsertSheetContent(
                     stringResource(if (isEditSheet) Res.string.edit_task else Res.string.add_task),
                 style = MaterialTheme.typography.headlineSmall.copy(fontFamily = flexFontEmphasis()),
             )
+            }
         }
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth().clip(MaterialTheme.shapes.large),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 28.dp),
         ) {
             item {
-                ListSelect(
+                Card(
+                    shape = MaterialTheme.shapes.extraLarge,
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+                ) {
+                    ListSelect(
                     title = null,
                     options = categories.map { it.id },
                     selected = newTask.categoryId,
@@ -180,7 +191,9 @@ fun TaskUpsertSheetContent(
                     labelProvider = { id ->
                         Text(text = categories.find { it.id == id }?.name ?: "")
                     },
-                )
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    )
+                }
             }
 
             item {
@@ -193,6 +206,10 @@ fun TaskUpsertSheetContent(
                     keyboardController?.show()
                 }
 
+                Card(
+                    shape = MaterialTheme.shapes.extraLarge,
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+                ) {
                 OutlinedTextField(
                     state = textFieldState,
                     shape = MaterialTheme.shapes.medium,
@@ -206,13 +223,14 @@ fun TaskUpsertSheetContent(
                         textFieldState.edit { append("\n") }
                         defaultAction()
                     },
-                    modifier = Modifier.fillMaxWidth().focusRequester(focusRequester),
+                    modifier = Modifier.fillMaxWidth().padding(8.dp).focusRequester(focusRequester),
                 )
+                }
             }
 
             item {
                 ListItem(
-                    modifier = Modifier.clip(detachedItemShape()),
+                    modifier = Modifier.clip(MaterialTheme.shapes.extraLarge),
                     colors = listItemColors(),
                     leadingContent = {
                         Icon(
@@ -255,8 +273,8 @@ fun TaskUpsertSheetContent(
 
             item {
                 Row(
-                    modifier = Modifier.padding(bottom = 32.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
                     if (isEditSheet) {
                         OutlinedButton(
