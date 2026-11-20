@@ -1,41 +1,45 @@
-Grit combines a to-do list and a daily habit tracker in one focused, ad-free app — so you can plan your day and build routines in the same place.
+Nexus Life brings daily planning and habit building together in one simple, private workspace.
 
-Whether you want a simple checklist, a habit streak, or a measurable goal, Grit keeps everything on your phone, offline and in sync.
+Plan what matters today, build routines at your own pace and understand your progress over time. Your information stays on your device, and you can use the app without creating an account.
 
-▸ TASKS THAT STAY ORGANIZED
-• Categorize tasks into custom lists
-• Add subtasks by long-pressing a task
-• Set per-task reminders and mark tasks done straight from the notification
-• Drag to reorder your list, and reorder automatically as tasks are completed
+TASKS AND DAILY PLANNING
+• Organise tasks with your own categories
+• Break larger tasks into smaller steps
+• Set reminders for important tasks
+• Reorder tasks and mark them complete
+• Keep completed work easy to review
 
-▸ HABITS THAT ACTUALLY STICK
-• Yes/No habits and Measurable habits with a target value and unit (8 km, 3 hours, 10 pages…)
-• Choose which days of the week each habit runs on
-• Get a daily reminder for any habit
-• Current streak, the best streak and consistency score for every habit
+HABIT TRACKING
+• Create simple or measurable habits
+• Choose the days each habit should appear
+• Set reminders for routines
+• Follow current and best streaks
+• Review consistency over time
 
-▸ SEE YOUR PROGRESS
-• Habit heat map and calendar view of completed days
-• Weekly comparison charts, up to a full year of history
-• Week day breakdown to find when you are most consistent
-• Monthly and overall analytics across all your habits
+PROGRESS AND INSIGHTS
+• View habit calendars and activity heat maps
+• Compare weekly progress
+• Explore monthly and overall summaries
+• Understand which days work best for your routines
 
-▸ BUILT FOR YOUR HOME SCREEN
-• Four widgets: All Tasks, Habit Overview, Habit Streak and Habit Week Chart
-• Live widget previews and quick refresh
+USEFUL HOME SCREEN WIDGETS
+• See your tasks at a glance
+• Check your habit overview
+• Follow streaks and weekly activity
 
-▸ MAKE IT YOURS
-• Material 3 Expressive design with Material You wallpaper colours
-• AMOLED dark theme, custom fonts and custom colour palettes
-• Biometric app lock, 24-hour clock, and configurable week start
-• Adapts to tablets, foldables and desktop
+MADE TO FIT YOUR ROUTINE
+• Light and dark appearance
+• Custom colours and fonts
+• Biometric app lock
+• Flexible week-start and clock settings
+• Layouts for phones, tablets and foldables
 
-▸ YOUR DATA, YOUR DEVICE
-• Works fully offline — no account required
-• Export and restore your data any time
-• Open source, GPL-3.0
-• Available in 35+ languages
+YOUR DATA, YOUR CONTROL
+• No account required
+• Works offline for everyday use
+• Export and restore your information
+• No advertisements
+• No subscription or locked features in this edition
+• Open source under the GNU GPL-3.0 licence
 
-Grit Plus unlocks extra themes, unlimited habits, subtasks and full analytics. Prefer everything unlocked? The FOSS variant on GitHub and F-Droid includes every feature for free.
-
-Made with Kotlin and Jetpack Compose. Open source under GPL-3.0 — contributions welcome.
+Nexus Life is built with Kotlin and Jetpack Compose. The project is based on the open-source Grit project and retains its GPL-3.0 licensing and required attribution.
