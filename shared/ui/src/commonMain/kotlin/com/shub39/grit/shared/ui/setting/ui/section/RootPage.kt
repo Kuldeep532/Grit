@@ -89,7 +89,8 @@ fun RootPage(
                         fontFamily = flexFontEmphasis(),
                     )
                 },
-                style = ExpressiveTopBarStyle.LargeFlexible,
+                style = ExpressiveTopBarStyle.CenterAligned,
+                titleAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
                 scrollBehavior = scrollBehavior,
                 maxWidth = ContentMaxWidth,
             )
