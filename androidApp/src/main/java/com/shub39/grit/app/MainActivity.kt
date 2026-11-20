@@ -78,14 +78,19 @@ class MainActivity : FragmentActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             lifecycleScope.launch {
+                val permissionPreferences =
+                    getSharedPreferences("charging_focus_permission", MODE_PRIVATE)
                 settingsDatastore.getChargingFocusFlow().distinctUntilChanged().collect { enabled ->
-                    if (
-                        enabled &&
+                    if (!enabled) {
+                        permissionPreferences.edit().putBoolean("asked", false).apply()
+                    } else if (
                         ContextCompat.checkSelfPermission(
                             this@MainActivity,
                             Manifest.permission.POST_NOTIFICATIONS,
-                        ) != PackageManager.PERMISSION_GRANTED
+                        ) != PackageManager.PERMISSION_GRANTED &&
+                        !permissionPreferences.getBoolean("asked", false)
                     ) {
+                        permissionPreferences.edit().putBoolean("asked", true).apply()
                         notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                     }
                 }
