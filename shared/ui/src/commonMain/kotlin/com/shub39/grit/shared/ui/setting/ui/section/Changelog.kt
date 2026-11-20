@@ -19,6 +19,7 @@ package com.shub39.grit.shared.ui.setting.ui.section
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.FilledTonalIconButton
@@ -72,7 +73,7 @@ fun Changelog(modifier: Modifier = Modifier, changelog: Changelog, onNavigateBac
         },
     ) { padding ->
         LazierColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(2.dp),
             contentPadding = padding,
         ) {
