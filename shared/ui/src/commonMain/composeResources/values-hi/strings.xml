@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="voice_announcements">बोलकर रिमाइंडर सुनाएँ</string>
-    <string name="voice_announcements_desc">टास्क और आदतों के रिमाइंडर हिंदी या अंग्रेज़ी में बोलकर सुनें</string>
+    <string name="voice_announcements_desc">ऐप की चुनी हुई भाषा में रिमाइंडर सुनें। आवाज़ की उपलब्धता आपके फ़ोन पर निर्भर करती है।</string>
 </resources>
