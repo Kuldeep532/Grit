@@ -29,10 +29,10 @@ Nexus Life is an independently maintained derivative of [Grit](https://github.co
 
 The project retains the GNU General Public License v3.0. Original copyright notices and required license terms are preserved. Changes made in this repository are published under the same license.
 
-## Maintainer and operator
+## Maintainer and project name
 
-Developed by **Kuldeep Kumar Yadav**  
-Operated by **Kuldeep Digital Services** (an independent individual-operated name, not a registered company).  
+Developed and maintained by **Kuldeep Kumar Yadav**  
+Project name: **Kuldeep Digital Services**.  
 [GitHub repository](https://github.com/Kuldeep532/Grit)
 
 ## Legal information
