@@ -25,7 +25,7 @@ Nexus Life does not sell personal information. The Play version's analytics and 
 
 ## Your choices
 
-You can disable reminders and voice announcements in Settings. You can choose the FOSS distribution, avoid using analytics-enabled Play features, and decide whether to export or share backups. Uninstalling the app removes its local app data unless your device separately backs it up.
+You can disable reminders, voice announcements and Charging Focus in Settings. You can choose the FOSS distribution, avoid using analytics-enabled Play features, and decide whether to export or share backups. Uninstalling the app removes its local app data unless your device separately backs it up.
 
 ## Sensitive information and children
 
