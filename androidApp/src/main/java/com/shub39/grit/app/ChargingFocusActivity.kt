@@ -121,7 +121,7 @@ class ChargingFocusActivity : ComponentActivity() {
                     Spacer(Modifier.height(8.dp))
                     OutlinedTextField(
                         value = pin,
-                        onValueChange = { if (it.length <= 8 && it.all(Char::isDigit)) pin = it },
+                        onValueChange = { if (it.length <= 8 && it.all { character -> character.isDigit() }) pin = it },
                         label = { Text("Create 4 to 8 digit PIN") },
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
