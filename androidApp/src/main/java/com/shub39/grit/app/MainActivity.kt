@@ -17,6 +17,7 @@
 package com.shub39.grit.app
 
 import android.os.Bundle
+import android.content.Intent
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
@@ -124,9 +125,14 @@ class MainActivity : FragmentActivity() {
             }
 
             if (showContent) {
-                GritNavDisplay { isPlusUser, onDismissRequest ->
-                    PaywallPage(isPlusUser = isPlusUser, onDismissRequest = onDismissRequest)
-                }
+                GritNavDisplay(
+                    paywall = { isPlusUser, onDismissRequest ->
+                        PaywallPage(isPlusUser = isPlusUser, onDismissRequest = onDismissRequest)
+                    },
+                    onOpenContentProtection = {
+                        startActivity(Intent(this@MainActivity, ContentProtectionActivity::class.java))
+                    },
+                )
             } else {
                 GritTheme(theme = state.theme) { InitialLoading() }
             }
