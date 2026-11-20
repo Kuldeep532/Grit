@@ -119,7 +119,7 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
 
                             val announcement =
                                 if (isHindi && canUseRequestedLanguage) {
-                                    "अब \${title.take(60)} का समय हो गया है।"
+                                    "अब ${title.take(60)} का समय हो गया है।"
                                 } else {
                                     "It's time for \${title.take(60)}."
                                 }
