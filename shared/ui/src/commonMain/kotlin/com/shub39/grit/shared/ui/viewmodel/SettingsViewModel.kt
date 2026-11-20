@@ -188,6 +188,14 @@ class SettingsViewModel(
                     settingsDatastore.setVoiceAnnouncements(action.pref)
                 }
 
+                is ChangeChargingFocus -> {
+                    analytics.trackEvent(
+                        AnalyticsEvent.SETTINGS_UPDATED,
+                        mapOf("setting" to "ChangeChargingFocus", "value" to action.pref),
+                    )
+                    settingsDatastore.setChargingFocus(action.pref)
+                }
+
                 is ChangePauseNotifications -> {
                     analytics.trackEvent(
                         AnalyticsEvent.SETTINGS_UPDATED,
@@ -267,6 +275,11 @@ class SettingsViewModel(
                 settingsDatastore
                     .getVoiceAnnouncementsFlow()
                     .onEach { pref -> _state.update { it.copy(voiceAnnouncements = pref) } }
+                    .launchIn(this)
+
+                settingsDatastore
+                    .getChargingFocusFlow()
+                    .onEach { pref -> _state.update { it.copy(chargingFocus = pref) } }
                     .launchIn(this)
 
                 themeDatastore
