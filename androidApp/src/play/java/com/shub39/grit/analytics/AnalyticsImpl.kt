@@ -28,7 +28,7 @@ import org.koin.core.component.get
 class AnalyticsImpl : AnalyticsWrapper, KoinComponent {
     private fun getDefaultProperties() =
         mapOf(
-            "app_name" to "Grit",
+            "app_name" to "Nexus Life",
             "app_version" to BuildConfig.VERSION_NAME,
             "time_stamp" to Clock.System.now().toEpochMilliseconds().div(1000),
             "is_plus" to get<BillingHandler>().isPlus.value,
