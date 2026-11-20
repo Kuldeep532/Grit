@@ -7,9 +7,9 @@
 
 Tasks, habits, reminders, preferences and related app content are stored locally on your device. Nexus Life does not require an account. If you export a backup, the file is saved or shared through the destination you select.
 
-## Notifications and voice announcements
+## Notifications, voice announcements and Charging Focus
 
-If enabled, reminders are scheduled by Android on your device. Voice Announcements use the text-to-speech service installed on your phone. The feature does not require microphone access. Speech processing is performed by the configured speech service.
+If enabled, reminders and Charging Focus prompts are scheduled by Android on your device. Voice Announcements use the text-to-speech service installed on your phone and do not require microphone access. If you create a Charging Focus emergency PIN, the app stores a salted password hash on your device; it does not upload the PIN. Speech processing is performed by the configured speech service.
 
 ## Google Play version analytics
 
