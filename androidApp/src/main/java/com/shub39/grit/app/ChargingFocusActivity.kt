@@ -18,6 +18,7 @@ import android.os.BatteryManager
 import android.view.WindowManager
 import android.util.Base64
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -59,6 +60,8 @@ class ChargingFocusActivity : ComponentActivity() {
         getSharedPreferences("charging_focus_security", Context.MODE_PRIVATE)
     }
 
+    private lateinit var focusBackCallback: OnBackPressedCallback
+
     private val unplugReceiver =
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
@@ -73,6 +76,14 @@ class ChargingFocusActivity : ComponentActivity() {
             finish()
             return
         }
+        focusBackCallback = object : OnBackPressedCallback(preferences.contains("pin_hash")) {
+            override fun handleOnBackPressed() {
+                // Keep the in-app back action behind the emergency PIN.
+                // Android Home and system navigation remain available by design.
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, focusBackCallback)
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.statusBarColor = android.graphics.Color.BLACK
         window.navigationBarColor = android.graphics.Color.BLACK
@@ -116,7 +127,7 @@ class ChargingFocusActivity : ComponentActivity() {
                     text = if (unlocked) {
                         "Focus mode is paused. You can return to your phone."
                     } else {
-                        "Take a quiet break while your phone charges."
+                        "Use your emergency PIN to leave this screen. Android Home and system controls remain available."
                     },
                     color = Color.LightGray,
                 )
@@ -158,6 +169,7 @@ class ChargingFocusActivity : ComponentActivity() {
                                         .putString("pin_hash", Base64.encodeToString(hash, Base64.NO_WRAP))
                                         .apply()
                                     hasPin = true
+                                    focusBackCallback.isEnabled = true
                                     pin = ""
                                     confirmation = ""
                                     message = "Emergency PIN saved on this device."
