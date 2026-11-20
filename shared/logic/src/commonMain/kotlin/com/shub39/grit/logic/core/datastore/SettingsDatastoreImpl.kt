@@ -36,6 +36,7 @@ class SettingsDatastoreImpl(private val datastore: DataStore<Preferences>) : Set
         private val startingSectionKey = stringPreferencesKey("starting_page")
         private val is24HrKey = booleanPreferencesKey("is_24Hr")
         private val notificationsKey = booleanPreferencesKey("notifications")
+        private val voiceAnnouncementsKey = booleanPreferencesKey("voice_announcements")
         private val biometricLockKey = booleanPreferencesKey("biometric")
         private val taskReorderKey = booleanPreferencesKey("task_reorder")
         private val compactHabitView = booleanPreferencesKey("compact_habit_view")
@@ -73,6 +74,13 @@ class SettingsDatastoreImpl(private val datastore: DataStore<Preferences>) : Set
 
     override suspend fun setNotifications(pref: Boolean) {
         datastore.edit { prefs -> prefs[notificationsKey] = pref }
+    }
+
+    override fun getVoiceAnnouncementsFlow(): Flow<Boolean> =
+        datastore.data.map { prefs -> prefs[voiceAnnouncementsKey] == true }
+
+    override suspend fun setVoiceAnnouncements(pref: Boolean) {
+        datastore.edit { prefs -> prefs[voiceAnnouncementsKey] = pref }
     }
 
     override fun getBiometricLockPref(): Flow<Boolean> =
