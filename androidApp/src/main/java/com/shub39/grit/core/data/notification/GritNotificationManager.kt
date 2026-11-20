@@ -74,82 +74,85 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     suspend fun announceReminder(title: String) {
         withTimeout(7_000) {
             withContext(Dispatchers.Main.immediate) {
-            suspendCancellableCoroutine { continuation ->
-                var speechEngine: TextToSpeech? = null
-                val finished = AtomicBoolean(false)
-                val utteranceId = UUID.randomUUID().toString()
+                suspendCancellableCoroutine { continuation ->
+                    var speechEngine: TextToSpeech? = null
+                    val finished = AtomicBoolean(false)
+                    val utteranceId = UUID.randomUUID().toString()
 
-                fun finish() {
-                    if (finished.compareAndSet(false, true)) {
-                        speechEngine?.shutdown()
-                        if (continuation.isActive) continuation.resume(Unit)
-                    }
-                }
-
-                continuation.invokeOnCancellation {
-                    speechEngine?.stop()
-                    speechEngine?.shutdown()
-                }
-
-                speechEngine =
-                    TextToSpeech(context.applicationContext) { status ->
-                        val engine = speechEngine ?: return@TextToSpeech
-                        if (status != TextToSpeech.SUCCESS) {
-                            finish()
-                            return@TextToSpeech
+                    fun finish() {
+                        if (finished.compareAndSet(false, true)) {
+                            speechEngine?.shutdown()
+                            if (continuation.isActive) continuation.resume(Unit)
                         }
+                    }
 
-                        val appLocale =
-                            context.resources.configuration.locales[0] ?: Locale.getDefault()
-                        val isHindi = appLocale.language.equals("hi", ignoreCase = true)
-                        val requestedLocale =
-                            if (isHindi) Locale("hi", "IN") else Locale("en", "IN")
-                        val languageStatus = engine.setLanguage(requestedLocale)
-                        val canUseRequestedLanguage =
-                            languageStatus >= TextToSpeech.LANG_AVAILABLE
-                        if (!canUseRequestedLanguage) {
-                            if (engine.setLanguage(Locale.ENGLISH) < TextToSpeech.LANG_AVAILABLE) {
+                    continuation.invokeOnCancellation {
+                        speechEngine?.stop()
+                        speechEngine?.shutdown()
+                    }
+
+                    speechEngine =
+                        TextToSpeech(context.applicationContext) { status ->
+                            val engine = speechEngine ?: return@TextToSpeech
+                            if (status != TextToSpeech.SUCCESS) {
                                 finish()
                                 return@TextToSpeech
                             }
-                        }
 
-                        val announcement =
-                            if (isHindi && canUseRequestedLanguage) {
-                                "अब ${title.take(60)} का समय हो गया है।"
-                            } else {
-                                "It's time for ${title.take(60)}."
+                            val appLocale =
+                                context.resources.configuration.locales[0] ?: Locale.getDefault()
+                            val isHindi = appLocale.language.equals("hi", ignoreCase = true)
+                            val requestedLocale =
+                                if (isHindi) Locale("hi", "IN") else Locale("en", "IN")
+                            val languageStatus = engine.setLanguage(requestedLocale)
+                            val canUseRequestedLanguage =
+                                languageStatus >= TextToSpeech.LANG_AVAILABLE
+                            if (!canUseRequestedLanguage) {
+                                if (
+                                    engine.setLanguage(Locale.ENGLISH) <
+                                        TextToSpeech.LANG_AVAILABLE
+                                ) {
+                                    finish()
+                                    return@TextToSpeech
+                                }
                             }
 
-                        engine.setSpeechRate(0.95f)
-                        engine.setOnUtteranceProgressListener(
-                            object : UtteranceProgressListener() {
-                                override fun onStart(id: String?) = Unit
+                            val announcement =
+                                if (isHindi && canUseRequestedLanguage) {
+                                    "अब \${title.take(60)} का समय हो गया है।"
+                                } else {
+                                    "It's time for \${title.take(60)}."
+                                }
 
-                                override fun onDone(id: String?) = finish()
+                            engine.setSpeechRate(0.95f)
+                            engine.setOnUtteranceProgressListener(
+                                object : UtteranceProgressListener() {
+                                    override fun onStart(id: String?) = Unit
 
-                                @Deprecated("Deprecated in Java")
-                                override fun onError(id: String?) = finish()
+                                    override fun onDone(id: String?) = finish()
 
-                                override fun onError(id: String?, errorCode: Int) = finish()
+                                    @Deprecated("Deprecated in Java")
+                                    override fun onError(id: String?) = finish()
 
-                                override fun onStop(id: String?, interrupted: Boolean) = finish()
+                                    override fun onError(id: String?, errorCode: Int) = finish()
+
+                                    override fun onStop(id: String?, interrupted: Boolean) = finish()
+                                }
+                            )
+
+                            if (
+                                engine.speak(
+                                    announcement,
+                                    TextToSpeech.QUEUE_FLUSH,
+                                    null,
+                                    utteranceId,
+                                ) == TextToSpeech.ERROR
+                            ) {
+                                finish()
                             }
-                        )
-
-                        if (
-                            engine.speak(
-                                announcement,
-                                TextToSpeech.QUEUE_FLUSH,
-                                null,
-                                utteranceId,
-                            ) == TextToSpeech.ERROR
-                        ) {
-                            finish()
                         }
-                    }
+                }
             }
-        }
         }
     }
 
