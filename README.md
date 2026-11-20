@@ -40,3 +40,8 @@ Project name: **Kuldeep Digital Services**.
 - [Privacy Policy](PRIVACY_POLICY.md)
 - [Terms & Conditions](TERMS_AND_CONDITIONS.md)
 
+
+
+## Content Protection data source
+
+The optional Content Protection feature prepares an adult-domain blocklist from [Bon-Appetit/porn-domains](https://github.com/Bon-Appetit/porn-domains), licensed under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). The downloaded list is stored locally on the device. The source list is community-maintained and may contain missed domains or incorrect entries. Domain filtering cannot guarantee detection of every adult image, video, page, or in-app item.
