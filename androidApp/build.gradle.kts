@@ -37,7 +37,7 @@ android {
     compileSdk { version = release(libs.versions.targetSdk.get().toInt()) { minorApiLevel = 2 } }
 
     defaultConfig {
-        applicationId = "com.kuldeep532.nexuslife"
+        applicationId = "com.nexuslife"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = appVersionCode
