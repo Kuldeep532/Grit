@@ -63,14 +63,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Inject Genius API Key
-        run: |
-          echo "POSTHOG_API_KEY=${{ secrets.POSTHOG_API_KEY }}" >> local.properties
-          echo "POSTHOG_HOST=${{ secrets.POSTHOG_HOST }}" >> local.properties
-
       - name: Build with Gradle
         run: |
-          ./gradlew bundlePlayRelease \
+          ./gradlew bundleFossRelease \
           -Pandroid.injected.signing.store.file=$GITHUB_WORKSPACE/signing-key.jks \
           -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
           -Pandroid.injected.signing.key.alias=key0 \
@@ -97,6 +92,6 @@ jobs:
         with:
           serviceAccountJson: ${{ steps.auth.outputs.credentials_file_path }}
           releaseFiles: ${{ env.AAB_PATH }}
-          packageName: com.shub39.grit
+          packageName: com.kuldeep532.nexuslife
           tracks: production
           whatsNewDirectory: distribution/whatsnew
