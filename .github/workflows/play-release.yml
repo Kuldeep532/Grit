@@ -40,6 +40,9 @@ jobs:
           fi
           echo "$KEYSTORE_FILE" | base64 -d > "$GITHUB_WORKSPACE/signing-key.jks"
 
+      - name: Apply code formatting
+        run: ./gradlew spotlessApply
+
       - name: Build free Play Store bundle
         run: |
           ./gradlew bundleFossRelease \
