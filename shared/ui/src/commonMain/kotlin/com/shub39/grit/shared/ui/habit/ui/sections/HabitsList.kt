@@ -348,20 +348,13 @@ private fun HabitsListContent(
         LazierColumn(
             state = lazyListState,
             contentPadding = contentPadding,
-            verticalArrangement = Arrangement.spacedBy(2.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             // habits
             itemsIndexed(habits, key = { _, it -> it.habit.id }) { index, habitWithAnalytics ->
                 ReorderableItem(reorderableListState, key = habitWithAnalytics.habit.id) {
                     val completed = state.completedHabitIds.contains(habitWithAnalytics.habit.id)
-                    val shape =
-                        when {
-                            habits.size == 1 || !completed -> detachedItemShape(radius = 28)
-                            index == 0 -> leadingItemShape(topRadius = 28, bottomRadius = 8)
-                            index == habits.size - 1 ->
-                                endItemShape(bottomRadius = 28, topRadius = 8)
-                            else -> middleItemShape(radius = 8)
-                        }
+                    val shape = detachedItemShape(radius = 24)
 
                     HabitCard(
                         habitWithAnalytics = habitWithAnalytics,
