@@ -14,6 +14,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.BatteryManager
 import android.view.WindowManager
 import android.util.Base64
 import androidx.activity.ComponentActivity
@@ -67,6 +68,11 @@ class ChargingFocusActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val batteryStatus = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        if (batteryStatus?.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
+            finish()
+            return
+        }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.statusBarColor = android.graphics.Color.BLACK
         window.navigationBarColor = android.graphics.Color.BLACK
