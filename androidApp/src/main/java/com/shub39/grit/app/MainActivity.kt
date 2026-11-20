@@ -17,8 +17,12 @@
 package com.shub39.grit.app
 
 import android.os.Bundle
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.enableEdgeToEdge
 import androidx.biometric.BiometricPrompt
 import androidx.compose.runtime.ComposeRuntimeFlags
@@ -29,11 +33,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shub39.grit.billing.PaywallPage
 import com.shub39.grit.core.interfaces.BiometricUtils
+import com.shub39.grit.core.interfaces.SettingsDatastore
 import com.shub39.grit.shared.ui.components.InitialLoading
 import com.shub39.grit.shared.ui.navigation.GritNavDisplay
 import com.shub39.grit.shared.ui.theme.GritTheme
@@ -41,10 +47,24 @@ import com.shub39.grit.shared.ui.viewmodel.MainViewModel
 import io.github.vinceglb.filekit.FileKit
 import io.github.vinceglb.filekit.dialogs.init
 import org.koin.android.ext.android.inject
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : FragmentActivity() {
     private val mainViewModel: MainViewModel by viewModel()
+    private val settingsDatastore: SettingsDatastore by inject()
+
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (!granted) {
+                Toast.makeText(
+                    this,
+                    "Allow notifications in app settings to receive Charging Focus reminders.",
+                    Toast.LENGTH_LONG,
+                ).show()
+            }
+        }
 
     @OptIn(ExperimentalComposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +75,22 @@ class MainActivity : FragmentActivity() {
         ComposeRuntimeFlags.isLinkBufferComposerEnabled = true
 
         FileKit.init(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            lifecycleScope.launch {
+                settingsDatastore.getChargingFocusFlow().distinctUntilChanged().collect { enabled ->
+                    if (
+                        enabled &&
+                        ContextCompat.checkSelfPermission(
+                            this@MainActivity,
+                            Manifest.permission.POST_NOTIFICATIONS,
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                }
+            }
+        }
 
         setContent {
             val state by mainViewModel.state.collectAsStateWithLifecycle()
