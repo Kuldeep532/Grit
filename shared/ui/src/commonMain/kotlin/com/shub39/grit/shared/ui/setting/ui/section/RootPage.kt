@@ -140,6 +140,25 @@ fun RootPage(
                         )
 
                         ListItem(
+                            content = {
+                                Text(text = stringResource(Res.string.voice_announcements))
+                            },
+                            supportingContent = {
+                                Text(text = stringResource(Res.string.voice_announcements_desc))
+                            },
+                            trailingContent = {
+                                ExpressiveSwitch(
+                                    checked = state.voiceAnnouncements,
+                                    onCheckedChange = {
+                                        onAction(SettingsAction.ChangeVoiceAnnouncements(it))
+                                    },
+                                )
+                            },
+                            colors = listItemColors(),
+                            modifier = Modifier.clip(middleItemShape()),
+                        )
+
+                        ListItem(
                             content = { Text(text = stringResource(Res.string.reorder_tasks)) },
                             supportingContent = {
                                 Text(text = stringResource(Res.string.reorder_tasks_desc))
