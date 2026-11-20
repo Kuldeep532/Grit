@@ -41,6 +41,10 @@ interface SettingsDatastore {
 
     suspend fun setVoiceAnnouncements(pref: Boolean)
 
+    fun getChargingFocusFlow(): Flow<Boolean>
+
+    suspend fun setChargingFocus(pref: Boolean)
+
     fun getBiometricLockPref(): Flow<Boolean>
 
     suspend fun setBiometricPref(pref: Boolean)
