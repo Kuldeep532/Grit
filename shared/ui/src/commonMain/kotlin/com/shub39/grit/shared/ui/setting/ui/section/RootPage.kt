@@ -102,30 +102,6 @@ fun RootPage(
                 contentPadding = padding,
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                // Grit Plus
-                item {
-                    ListItem(
-                        content = { Text(text = stringResource(Res.string.grit_plus)) },
-                        colors = listItemColors(),
-                        modifier =
-                            Modifier.clip(detachedItemShape()).clickable { onNavigateToPaywall() },
-                        trailingContent = {
-                            Icon(
-                                imageVector = vectorResource(Res.drawable.arrow_forward),
-                                contentDescription = "Grit Plus",
-                            )
-                        },
-                        leadingContent = {
-                            Icon(
-                                imageVector = vectorResource(Res.drawable.grit_icon),
-                                contentDescription = null,
-                                modifier = Modifier.size(30.dp),
-                                tint = MaterialTheme.colorScheme.primary,
-                            )
-                        },
-                    )
-                }
-
                 // General settings
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -305,7 +281,7 @@ fun RootPage(
                                 )
                             },
                             supportingContent = {
-                                Text(text = "Grit ${state.currentVersion ?: "x.x.x"}")
+                                Text(text = "Nexus Life ${state.currentVersion ?: "x.x.x"}")
                             },
                             trailingContent = {
                                 Icon(
