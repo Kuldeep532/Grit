@@ -38,6 +38,7 @@ import com.shub39.grit.core.interfaces.IntentActions
 import com.shub39.grit.core.tasks.SubTask
 import com.shub39.grit.core.tasks.Task
 import java.util.Locale
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.UUID
 import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
@@ -73,12 +74,11 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
         withContext(Dispatchers.Main.immediate) {
             suspendCancellableCoroutine { continuation ->
                 var speechEngine: TextToSpeech? = null
-                var finished = false
+                val finished = AtomicBoolean(false)
                 val utteranceId = UUID.randomUUID().toString()
 
                 fun finish() {
-                    if (!finished) {
-                        finished = true
+                    if (finished.compareAndSet(false, true)) {
                         speechEngine?.shutdown()
                         if (continuation.isActive) continuation.resume(Unit)
                     }
@@ -97,7 +97,8 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
                             return@TextToSpeech
                         }
 
-                        val appLocale = context.resources.configuration.locales[0] ?: Locale.getDefault()
+                        val appLocale =
+                            context.resources.configuration.locales[0] ?: Locale.getDefault()
                         val isHindi = appLocale.language.equals("hi", ignoreCase = true)
                         val requestedLocale =
                             if (isHindi) Locale("hi", "IN") else Locale("en", "IN")
