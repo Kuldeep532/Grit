@@ -257,13 +257,13 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                         }
                     }
                     Text(
-                        text = "Operated by Kuldeep Digital Services",
+                        text = "Project: Kuldeep Digital Services",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(start = 80.dp, top = 4.dp),
                     )
                     Text(
-                        text = "Nexus Life is independently maintained by Kuldeep Kumar Yadav. It is based on the open-source Grit project by Shubham Gorai and retains the GNU GPL v3 license.",
+                        text = "Nexus Life is a personal project maintained by Kuldeep Kumar Yadav under the name Kuldeep Digital Services. It is based on the open-source Grit project by Shubham Gorai and retains the GNU GPL v3 license.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 8.dp),
