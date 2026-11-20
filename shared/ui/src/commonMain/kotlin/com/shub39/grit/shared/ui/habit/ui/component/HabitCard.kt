@@ -139,90 +139,96 @@ fun HabitCard(
         shape = shape,
         modifier = modifier.animateContentSize(),
     ) {
-        ListItem(
-            modifier = Modifier.fillMaxWidth().clip(MaterialTheme.shapes.large),
-            colors =
-                ListItemDefaults.colors(
-                    containerColor = cardBackground,
-                    headlineColor = cardContent,
-                    supportingColor = cardContent,
-                    trailingIconColor = cardContent,
-                    leadingIconColor = cardContent,
-                ),
-            leadingContent = {
-                AnimatedContent(targetState = completed) {
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                AnimatedContent(targetState = completed) { isDone ->
                     Icon(
-                        imageVector =
-                            vectorResource(
-                                if (!it) Res.drawable.circle_border else Res.drawable.check_circle
-                            ),
+                        imageVector = vectorResource(
+                            if (isDone) Res.drawable.check_circle else Res.drawable.circle_border
+                        ),
                         contentDescription = null,
+                        modifier = Modifier.size(26.dp),
+                        tint = if (isDone) colorScheme.primary else cardContent,
                     )
                 }
-            },
-            content = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Text(
                         text = habitWithAnalytics.habit.title,
-                        maxLines = 1,
-                        style =
-                            MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                        modifier =
-                            Modifier.gritSharedBounds(HabitTitleKey(habitWithAnalytics.habit.id))
-                                .basicMarquee(),
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                        maxLines = 2,
+                        modifier = Modifier.gritSharedBounds(HabitTitleKey(habitWithAnalytics.habit.id)),
                     )
-                }
-            },
-            supportingContent = {
-                if (habitWithAnalytics.habit.reminder) {
-                    Text(
-                        text = habitWithAnalytics.habit.time.time.toFormattedString(is24Hr),
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                }
-            },
-            trailingContent = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    ) {
-                        Icon(
-                            imageVector = vectorResource(Res.drawable.heat),
-                            contentDescription = null,
+                    if (habitWithAnalytics.habit.reminder) {
+                        Text(
+                            text = habitWithAnalytics.habit.time.time.toFormattedString(is24Hr),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = cardContent.copy(alpha = 0.78f),
                         )
-
-                        Text(text = habitWithAnalytics.currentStreak.toString())
+                    } else {
+                        Text(
+                            text = if (canCompleteToday) "Tap to record today's progress" else "Scheduled on selected days",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = cardContent.copy(alpha = 0.72f),
+                        )
                     }
+                }
 
-                    Spacer(modifier = Modifier.width(8.dp))
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = habitWithAnalytics.currentStreak.toString(),
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        color = cardContent,
+                    )
+                    Text(
+                        text = "day streak",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = cardContent.copy(alpha = 0.72f),
+                    )
+                }
+            }
 
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = if (completed) "Completed today" else if (canCompleteToday) "Today's progress" else "Not scheduled today",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = cardContent.copy(alpha = 0.8f),
+                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(
                         onClick = {
                             onPrepareAnalytics(habitWithAnalytics.habit)
                             onNavigateToAnalytics()
                         },
-                        modifier =
-                            Modifier.size(
-                                IconButtonDefaults.smallContainerSize(
-                                    IconButtonDefaults.IconButtonWidthOption.Wide
-                                )
-                            ),
-                        colors =
-                            IconButtonDefaults.iconButtonColors(
-                                containerColor = colorScheme.primary,
-                                contentColor = colorScheme.onPrimary,
-                            ),
+                        modifier = Modifier.size(
+                            IconButtonDefaults.smallContainerSize(
+                                IconButtonDefaults.IconButtonWidthOption.Wide
+                            )
+                        ),
+                        colors = IconButtonDefaults.iconButtonColors(
+                            containerColor = colorScheme.primary,
+                            contentColor = colorScheme.onPrimary,
+                        ),
                     ) {
                         Icon(
                             imageVector = vectorResource(Res.drawable.analytics),
                             contentDescription = "Analytics",
                         )
                     }
-
                     AnimatedVisibility(visible = editState) {
                         Row {
                             Spacer(modifier = Modifier.width(8.dp))
@@ -230,8 +236,8 @@ fun HabitCard(
                         }
                     }
                 }
-            },
-        )
+            }
+        }
 
         if (!compactView) {
             WeekCalendar(
