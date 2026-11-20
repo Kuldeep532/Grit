@@ -9,7 +9,7 @@ Tasks, habits, reminders, preferences and related app content are stored locally
 
 ## Notifications, voice announcements and Charging Focus
 
-If enabled, reminders and Charging Focus prompts are scheduled by Android on your device. Voice Announcements use the text-to-speech service installed on your phone and do not require microphone access. If you create a Charging Focus emergency PIN, the app stores a salted password hash on your device; it does not upload the PIN. Speech processing is performed by the configured speech service.
+If enabled, reminders and Charging Focus prompts are scheduled by Android on your device. Voice Announcements use the text-to-speech service installed on your phone and do not require microphone access. Speech processing is performed by the configured speech service.
 
 ## Google Play version analytics
 
