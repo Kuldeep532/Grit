@@ -51,9 +51,7 @@ object ContentFilterBlocklist {
 
         val allowed = parseDomains(downloadText(allowUrl))
         val blocked = parseDomains(downloadText(blockUrl))
-            .filterNot { domain -> allowed.any { allowedDomain ->
-                domain == allowedDomain || domain.endsWith(".$allowedDomain")
-            } }
+            .filterNot { domain -> isCoveredByAllowlist(domain, allowed) }
             .toSortedSet()
 
         require(blocked.isNotEmpty()) { "The downloaded domain list was empty." }
@@ -115,6 +113,16 @@ object ContentFilterBlocklist {
             }
         } finally {
             connection.disconnect()
+        }
+    }
+
+    private fun isCoveredByAllowlist(domain: String, allowlist: Set<String>): Boolean {
+        var candidate = domain
+        while (true) {
+            if (candidate in allowlist) return true
+            val dot = candidate.indexOf('.')
+            if (dot < 0) return false
+            candidate = candidate.substring(dot + 1)
         }
     }
 
