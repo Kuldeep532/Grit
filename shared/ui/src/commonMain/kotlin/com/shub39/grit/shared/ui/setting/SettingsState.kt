@@ -39,6 +39,7 @@ data class SettingsState(
     val startOfTheWeek: DayOfWeek = DayOfWeek.MONDAY,
     val pauseNotifications: Boolean = false,
     val voiceAnnouncements: Boolean = false,
+    val chargingFocus: Boolean = false,
     val startingPage: Sections = Sections.Tasks,
     val isBiometricLockOn: Boolean? = null,
     val isBiometricLockAvailable: Boolean = false,
