@@ -36,3 +36,7 @@ Do not enter passwords, payment details or other highly sensitive information in
 This policy may change when app features or service providers change. For questions, use the contact or issue options on the [official project page](https://github.com/Kuldeep532/Grit).
 
 **Open-source credit:** Nexus Life is based on Grit by Shubham Gorai and retains the GNU General Public License version 3.
+
+## Content Protection
+
+If you choose to use Content Protection, Nexus Life downloads a community-maintained adult-domain list and its allowlist from the Bon-Appetit/porn-domains project and stores the resulting list on your device. When protection is active, DNS requests routed to the app's local VPN are checked against that list. Non-blocked DNS requests are forwarded to Cloudflare's public DNS resolver at 1.1.1.1. Cloudflare may receive and process the domain names your device looks up under its own privacy terms. This version does not send your browsing history or full web traffic to a Nexus Life server. The local VPN does not inspect page content, images or videos. Encrypted DNS and other methods may bypass filtering. You can stop protection from the app or Android VPN settings.
