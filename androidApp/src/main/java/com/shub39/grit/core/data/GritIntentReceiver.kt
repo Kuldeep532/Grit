@@ -59,15 +59,18 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
 
                 if (intent != null && !pauseNotifications) {
                     when (intent.action) {
-                        IntentActions.HABIT_NOTIFICATION.action -> habitNotification(intent, voiceAnnouncements)
+                        IntentActions.HABIT_NOTIFICATION.action ->
+                            habitNotification(intent, voiceAnnouncements)
 
                         IntentActions.ADD_HABIT_STATUS.action -> addHabitStatus(intent)
 
                         IntentActions.MARK_TASK_DONE.action -> markTaskDone(intent)
 
-                        IntentActions.TASK_NOTIFICATION.action -> taskNotification(intent, voiceAnnouncements)
+                        IntentActions.TASK_NOTIFICATION.action ->
+                            taskNotification(intent, voiceAnnouncements)
 
-                        IntentActions.SUBTASK_NOTIFICATION.action -> subTaskNotification(intent, voiceAnnouncements)
+                        IntentActions.SUBTASK_NOTIFICATION.action ->
+                            subTaskNotification(intent, voiceAnnouncements)
 
                         IntentActions.MARK_SUBTASK_DONE.action -> markSubTaskDone(intent)
 
@@ -101,7 +104,9 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
         if (!subTask.status && subTask.reminder != null) {
             GritLogger.d(TAG, "sending SubTask notification")
             get<GritNotificationManager>().subTaskNotification(subTask)
-            if (voiceAnnouncements) get<GritNotificationManager>().announceReminder(subTask.title)
+            if (voiceAnnouncements) {
+                get<GritNotificationManager>().announceReminder(subTask.title)
+            }
         }
     }
 
@@ -211,7 +216,9 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
         if (!task.status && task.reminder != null) {
             GritLogger.d(TAG, "sending Task notification")
             get<GritNotificationManager>().taskNotification(task)
-            if (voiceAnnouncements) get<GritNotificationManager>().announceReminder(task.title)
+            if (voiceAnnouncements) {
+                get<GritNotificationManager>().announceReminder(task.title)
+            }
         }
     }
 
@@ -243,7 +250,9 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
             GritLogger.d(TAG, "Habit already completed today")
         } else {
             get<GritNotificationManager>().habitNotification(habit)
-            if (voiceAnnouncements) get<GritNotificationManager>().announceReminder(habit.title)
+            if (voiceAnnouncements) {
+                get<GritNotificationManager>().announceReminder(habit.title)
+            }
         }
 
         get<AlarmScheduler>().schedule(habit)
