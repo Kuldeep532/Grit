@@ -435,7 +435,7 @@ private fun TaskListTopBar(
                 ) {
                     Icon(
                         imageVector = vectorResource(Res.drawable.delete),
-                        contentDescription = null,
+                        contentDescription = stringResource(Res.string.delete),
                     )
                 }
             }
@@ -458,7 +458,7 @@ private fun TaskListTopBar(
                 ) {
                     Icon(
                         imageVector = vectorResource(Res.drawable.reorder),
-                        contentDescription = null,
+                        contentDescription = stringResource(Res.string.reorder_tasks),
                     )
                 }
             }
