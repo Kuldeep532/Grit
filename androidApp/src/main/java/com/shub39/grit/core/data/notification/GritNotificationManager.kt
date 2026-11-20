@@ -24,6 +24,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.RemoteInput
@@ -35,6 +37,12 @@ import com.shub39.grit.core.interfaces.AppNotificationManager
 import com.shub39.grit.core.interfaces.IntentActions
 import com.shub39.grit.core.tasks.SubTask
 import com.shub39.grit.core.tasks.Task
+import java.util.Locale
+import java.util.UUID
+import kotlin.coroutines.resume
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
 
 @Single(binds = [AppNotificationManager::class])
@@ -60,6 +68,86 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     }
 
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
+
+    suspend fun announceReminder(title: String) {
+        withContext(Dispatchers.Main.immediate) {
+            suspendCancellableCoroutine { continuation ->
+                var speechEngine: TextToSpeech? = null
+                var finished = false
+                val utteranceId = UUID.randomUUID().toString()
+
+                fun finish() {
+                    if (!finished) {
+                        finished = true
+                        speechEngine?.shutdown()
+                        if (continuation.isActive) continuation.resume(Unit)
+                    }
+                }
+
+                continuation.invokeOnCancellation {
+                    speechEngine?.stop()
+                    speechEngine?.shutdown()
+                }
+
+                speechEngine =
+                    TextToSpeech(context.applicationContext) { status ->
+                        val engine = speechEngine ?: return@TextToSpeech
+                        if (status != TextToSpeech.SUCCESS) {
+                            finish()
+                            return@TextToSpeech
+                        }
+
+                        val appLocale = context.resources.configuration.locales[0] ?: Locale.getDefault()
+                        val isHindi = appLocale.language.equals("hi", ignoreCase = true)
+                        val requestedLocale =
+                            if (isHindi) Locale("hi", "IN") else Locale("en", "IN")
+                        val languageStatus = engine.setLanguage(requestedLocale)
+                        val canUseRequestedLanguage =
+                            languageStatus >= TextToSpeech.LANG_AVAILABLE
+                        if (!canUseRequestedLanguage) {
+                            if (engine.setLanguage(Locale.ENGLISH) < TextToSpeech.LANG_AVAILABLE) {
+                                finish()
+                                return@TextToSpeech
+                            }
+                        }
+
+                        val announcement =
+                            if (isHindi && canUseRequestedLanguage) {
+                                "अब $title का समय हो गया है।"
+                            } else {
+                                "It's time for $title."
+                            }
+
+                        engine.setSpeechRate(0.95f)
+                        engine.setOnUtteranceProgressListener(
+                            object : UtteranceProgressListener() {
+                                override fun onStart(id: String?) = Unit
+
+                                override fun onDone(id: String?) = finish()
+
+                                @Deprecated("Deprecated in Java")
+                                override fun onError(id: String?) = finish()
+
+                                override fun onError(id: String?, errorCode: Int) = finish()
+
+                                override fun onStop(id: String?, interrupted: Boolean) = finish()
+                            }
+                        )
+
+                        if (
+                            engine.speak(
+                                announcement,
+                                TextToSpeech.QUEUE_FLUSH,
+                                null,
+                                utteranceId,
+                            ) == TextToSpeech.ERROR
+                        ) {
+                            finish()
+                        }
+                    }
+            }
+        }
+    }
 
     // shows habit notification if permission granted
     override fun habitNotification(habit: Habit) {
