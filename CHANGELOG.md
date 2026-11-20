@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.5.1
+- Rebranded the Android app as Nexus Life
+- Introduced a redesigned bottom navigation and compact screen headers
+- Added a new blue visual identity and launcher icon
+- Improved screen reader labels for task actions
+- Prepared a free FOSS build for Google Play
+
 ## 6.5.0
 - Updated Translations
 - Added Confetti animations on Task and Habit Completion
