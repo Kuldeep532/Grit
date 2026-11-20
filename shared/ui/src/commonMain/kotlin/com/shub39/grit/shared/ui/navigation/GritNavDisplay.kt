@@ -45,6 +45,7 @@ import com.shub39.grit.shared.ui.setting.ui.section.About
 import com.shub39.grit.shared.ui.setting.ui.section.BackupPage
 import com.shub39.grit.shared.ui.setting.ui.section.Changelog
 import com.shub39.grit.shared.ui.setting.ui.section.LookAndFeelPage
+import com.shub39.grit.shared.ui.setting.ui.section.LegalInfoPage
 import com.shub39.grit.shared.ui.setting.ui.section.RootPage
 import com.shub39.grit.shared.ui.task.ui.TasksPage
 import com.shub39.grit.shared.ui.theme.GritTheme
@@ -305,6 +306,46 @@ private fun EntryProviderScope<Routes>.settingsScreens(
             modifier = Modifier.background(colorScheme.background),
             versionName = state.currentVersion ?: "1.0.00-Demo",
             onNavigateBack = { topLevelBackStack.removeLast() },
+            onNavigateToPrivacy = { topLevelBackStack.add(PrivacyPolicy) },
+            onNavigateToTerms = { topLevelBackStack.add(TermsAndConditions) },
+        )
+    }
+
+    entry<PrivacyPolicy>(metadata = TwoPaneScene.twoPane() + horizontalTransitionMetadata()) {
+        LegalInfoPage(
+            title = "Privacy Policy",
+            onNavigateBack = { topLevelBackStack.removeLast() },
+            sections = listOf(
+                "Who operates the app" to "Nexus Life is developed by Kuldeep Kumar Yadav and operated by Kuldeep Digital Services, an independent individual-operated name and not a registered company.",
+                "Information stored on your device" to "Tasks, habits, reminders, preferences and related app content are stored locally on your device. Nexus Life does not require you to create an account. If you export a backup, the exported file is saved or shared only through the destination you choose.",
+                "Notifications and voice reminders" to "If you enable reminders, the app schedules notifications on your device. If you enable Voice Announcements, Android's installed text-to-speech service speaks reminder text. The app does not need microphone access for this feature. Voice processing is handled by the speech service configured on your phone.",
+                "Analytics in the Google Play version" to "The Google Play version uses PostHog to record app usage events, app version, event time, subscription status and event-specific settings or action details to understand app usage and improve the experience. The free and open-source FOSS version does not send these analytics events. PostHog may process technical information according to its own privacy policy.",
+                "Subscriptions and payments" to "If subscriptions are offered in the Google Play version, purchases are handled through Google Play and RevenueCat. Payment card and bank details are handled by the payment provider, not stored by Nexus Life. Purchase and entitlement information may be processed to verify subscription access.",
+                "Information sharing" to "Nexus Life does not sell your personal information. Data may be processed by the service providers described above when you use the corresponding Play version features. Your phone's Android system and installed text-to-speech provider may also process information needed to provide their services.",
+                "Your choices" to "You can disable reminders and voice announcements in Settings. You can choose whether to use the Play or FOSS distribution. You can avoid sharing exported backup files. Uninstalling the app removes its locally stored app data unless your device has separately backed it up.",
+                "Children and sensitive information" to "Nexus Life is a general productivity app and is not designed to collect sensitive personal information. Please do not enter passwords, financial account details or other highly sensitive information into task or habit descriptions.",
+                "Changes and contact" to "This policy may be updated when app features or service providers change. For privacy questions, use the contact or issue options on the official project page: https://github.com/Kuldeep532/Grit."
+            ),
+        )
+    }
+
+    entry<TermsAndConditions>(metadata = TwoPaneScene.twoPane() + horizontalTransitionMetadata()) {
+        LegalInfoPage(
+            title = "Terms & Conditions",
+            onNavigateBack = { topLevelBackStack.removeLast() },
+            sections = listOf(
+                "Acceptance" to "By installing or using Nexus Life, you agree to these terms. If you do not agree, please stop using the app.",
+                "Who provides Nexus Life" to "Nexus Life is developed by Kuldeep Kumar Yadav and operated by Kuldeep Digital Services as an independent individual-operated name. It is not represented as a registered company.",
+                "Purpose of the app" to "Nexus Life provides tools for personal task planning, habit tracking, reminders, analytics and backup. You are responsible for the accuracy of the information you enter and for deciding how to use reminders and other features.",
+                "No professional advice" to "Nexus Life is a personal organisation tool. It does not provide medical, mental health, legal, financial or emergency services. Do not rely on it as a substitute for professional advice or urgent assistance.",
+                "Your data and backups" to "You are responsible for keeping your device secure and maintaining copies of important exported backups. The app cannot guarantee that data will remain available after device loss, app removal, operating system changes or storage failure.",
+                "Notifications and device compatibility" to "Reminder delivery and voice announcements depend on Android settings, battery restrictions, notification permissions and the speech voices installed on your device. Delivery cannot be guaranteed in every circumstance.",
+                "Open-source license" to "Nexus Life is based on Grit by Shubham Gorai and is distributed under the GNU General Public License version 3. The applicable open-source license governs your rights to use, study, modify and redistribute the covered software. License notices and source credits must be preserved.",
+                "Subscriptions" to "Where a paid subscription is offered, its price, renewal, cancellation and refund terms are presented by Google Play at the time of purchase. Google Play and the applicable payment providers process the transaction.",
+                "Acceptable use" to "Do not use the app to violate laws, infringe another person's rights, interfere with the app or attempt to misuse its services.",
+                "Availability and changes" to "Features may be changed, suspended or discontinued. The app is provided on an as-available basis, to the extent permitted by applicable law. Nothing in these terms excludes rights that cannot legally be excluded.",
+                "Contact" to "For questions about these terms, use the contact or issue options on the official project page: https://github.com/Kuldeep532/Grit."
+            ),
         )
     }
 
