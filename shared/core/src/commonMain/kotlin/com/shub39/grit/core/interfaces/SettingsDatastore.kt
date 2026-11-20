@@ -37,6 +37,10 @@ interface SettingsDatastore {
 
     suspend fun setNotifications(pref: Boolean)
 
+    fun getVoiceAnnouncementsFlow(): Flow<Boolean>
+
+    suspend fun setVoiceAnnouncements(pref: Boolean)
+
     fun getBiometricLockPref(): Flow<Boolean>
 
     suspend fun setBiometricPref(pref: Boolean)
