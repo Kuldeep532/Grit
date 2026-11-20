@@ -105,7 +105,7 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
             GritLogger.d(TAG, "sending SubTask notification")
             get<GritNotificationManager>().subTaskNotification(subTask)
             if (voiceAnnouncements) {
-                get<GritNotificationManager>().announceReminder(subTask.title)
+                get<GritNotificationManager>().announceReminder(subTask.title, GritNotificationManager.ReminderKind.SUBTASK)
             }
         }
     }
@@ -217,7 +217,7 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
             GritLogger.d(TAG, "sending Task notification")
             get<GritNotificationManager>().taskNotification(task)
             if (voiceAnnouncements) {
-                get<GritNotificationManager>().announceReminder(task.title)
+                get<GritNotificationManager>().announceReminder(task.title, GritNotificationManager.ReminderKind.TASK)
             }
         }
     }
@@ -251,7 +251,7 @@ class GritIntentReceiver : BroadcastReceiver(), KoinComponent {
         } else {
             get<GritNotificationManager>().habitNotification(habit)
             if (voiceAnnouncements) {
-                get<GritNotificationManager>().announceReminder(habit.title)
+                get<GritNotificationManager>().announceReminder(habit.title, GritNotificationManager.ReminderKind.HABIT)
             }
         }
 
