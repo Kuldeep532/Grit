@@ -77,6 +77,7 @@ fun RootPage(
     onNavigateToPaywall: () -> Unit,
     onNavigateToChangelog: () -> Unit,
     onNavigateToAppInfo: () -> Unit,
+    onNavigateToContentProtection: () -> Unit,
 ) {
     var showLocalePicker by rememberSaveable { mutableStateOf(false) }
 
@@ -156,6 +157,23 @@ fun RootPage(
                             },
                             colors = listItemColors(),
                             modifier = Modifier.clip(middleItemShape()),
+                        )
+
+                        ListItem(
+                            content = { Text(text = "Content Protection") },
+                            supportingContent = {
+                                Text(text = "Block known adult website domains on this phone")
+                            },
+                            trailingContent = {
+                                Icon(
+                                    imageVector = vectorResource(Res.drawable.arrow_forward),
+                                    contentDescription = "Open Content Protection",
+                                )
+                            },
+                            colors = listItemColors(),
+                            modifier = Modifier.clip(middleItemShape()).clickable {
+                                onNavigateToContentProtection()
+                            },
                         )
 
                         ListItem(
@@ -417,5 +435,6 @@ private fun Preview() {
         onNavigateToPaywall = {},
         onNavigateToChangelog = {},
         onNavigateToAppInfo = {},
+        onNavigateToContentProtection = {},
     )
 }
