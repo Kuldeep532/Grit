@@ -23,5 +23,5 @@ data class Theme(
     val isMaterialYou: Boolean = false,
     val font: Fonts = Fonts.FIGTREE,
     val paletteStyle: PaletteStyle = PaletteStyle.TONALSPOT,
-    val seedColor: Int = 0x315D9A,
+    val seedColor: Int = 0xFF315D9A,
 )
