@@ -100,7 +100,6 @@ fun About(versionName: String, onNavigateBack: () -> Unit, modifier: Modifier = 
             contentPadding = padding,
         ) {
             aboutApp(versionName = versionName, uriHandler = uriHandler)
-            engagementLinks(uriHandler)
             item {
                 ListItem(
                     colors = listItemColors(),
@@ -225,7 +224,7 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Grit",
+                            text = "Nexus Life",
                             style =
                                 MaterialTheme.typography.headlineMedium.copy(
                                     fontFamily = flexFontRounded()
@@ -237,6 +236,11 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                                 MaterialTheme.typography.titleMedium.copy(
                                     color = MaterialTheme.colorScheme.primary
                                 ),
+                        )
+                        Text(
+                            text = "Based on Grit by Shubham Gorai",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
 
@@ -251,7 +255,7 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                             )
                         }
                         FilledTonalIconButton(
-                            onClick = { uriHandler.openUri("https://github.com/shub39/Grit") }
+                            onClick = { uriHandler.openUri("https://github.com/Kuldeep532/Grit") }
                         ) {
                             Icon(
                                 imageVector = vectorResource(Res.drawable.github),
@@ -288,7 +292,7 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
 
                         Column {
                             Text(
-                                text = "Shubham Gorai",
+                                text = "Kuldeep Kumar Yadav",
                                 style =
                                     MaterialTheme.typography.headlineSmall.copy(
                                         fontFamily = flexFontRounded()
@@ -309,9 +313,8 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         listOf(
-                                "https://github.com/shub39" to Res.drawable.github,
-                                "https://shub39.github.io/" to Res.drawable.language,
-                                "mailto:cptnshubham39+grit_app@gmail.com" to Res.drawable.email,
+                                "https://github.com/Kuldeep532" to Res.drawable.github,
+                                "https://github.com/Kuldeep532/Grit" to Res.drawable.language,
                             )
                             .forEach { pair ->
                                 FilledTonalIconButton(
