@@ -67,7 +67,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
-fun About(versionName: String, onNavigateBack: () -> Unit, modifier: Modifier = Modifier) {
+fun About(\n    versionName: String,\n    onNavigateBack: () -> Unit,\n    onNavigateToPrivacy: () -> Unit,\n    onNavigateToTerms: () -> Unit,\n    modifier: Modifier = Modifier,\n) {
     val uriHandler = LocalUriHandler.current
 
     var showLicenseBottomSheet by rememberSaveable { mutableStateOf(false) }
@@ -100,6 +100,22 @@ fun About(versionName: String, onNavigateBack: () -> Unit, modifier: Modifier = 
             contentPadding = padding,
         ) {
             aboutApp(versionName = versionName, uriHandler = uriHandler)
+            item {
+                ListItem(
+                    colors = listItemColors(),
+                    content = { Text("Privacy Policy") },
+                    supportingContent = { Text("How Nexus Life handles your information") },
+                    modifier = Modifier.clip(detachedItemShape()).clickable(onClick = onNavigateToPrivacy),
+                )
+            }
+            item {
+                ListItem(
+                    colors = listItemColors(),
+                    content = { Text("Terms & Conditions") },
+                    supportingContent = { Text("Terms for using Nexus Life") },
+                    modifier = Modifier.clip(detachedItemShape()).clickable(onClick = onNavigateToTerms),
+                )
+            }
             item {
                 ListItem(
                     colors = listItemColors(),
@@ -234,6 +250,18 @@ private fun LazyListScope.aboutApp(versionName: String, uriHandler: UriHandler) 
                             )
                         }
                     }
+                    Text(
+                        text = "Operated by Kuldeep Digital Services",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(start = 80.dp, top = 4.dp),
+                    )
+                    Text(
+                        text = "Nexus Life is independently maintained by Kuldeep Kumar Yadav. It is based on the open-source Grit project by Shubham Gorai and retains the GNU GPL v3 license.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(top = 8.dp),
+                    )
 
                     FlowRow(
                         modifier = Modifier.padding(start = 80.dp, top = 4.dp),
