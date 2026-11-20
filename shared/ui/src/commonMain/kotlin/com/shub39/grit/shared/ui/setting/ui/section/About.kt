@@ -95,7 +95,7 @@ fun About(versionName: String, onNavigateBack: () -> Unit, modifier: Modifier = 
         },
     ) { padding ->
         LazierColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = padding,
         ) {
