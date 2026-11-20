@@ -9,6 +9,7 @@
 package com.shub39.grit.app
 
 import android.content.Intent
+import android.net.Uri
 import android.net.VpnService
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -114,6 +115,22 @@ class ContentProtectionActivity : AppCompatActivity() {
                         message = "Content Protection has been turned off."
                     },
                 ) { Text("Turn off protection") }
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    "Domain list source: Bon-Appetit/porn-domains. Licensed under Creative Commons Attribution-ShareAlike 4.0.",
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Spacer(Modifier.height(6.dp))
+                Button(
+                    onClick = {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://github.com/Bon-Appetit/porn-domains"),
+                            ),
+                        )
+                    },
+                ) { Text("View list source and license") }
                 Spacer(Modifier.height(20.dp))
                 Text(
                     "Important: this first version filters IPv4 UDP DNS requests only. Some apps and websites can bypass domain filtering using encrypted DNS, their own network connection, or other methods. It does not inspect images or videos. Only one VPN can be active at a time.",
