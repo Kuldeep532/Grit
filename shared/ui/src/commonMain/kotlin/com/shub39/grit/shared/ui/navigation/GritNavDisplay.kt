@@ -59,6 +59,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun GritNavDisplay(
     modifier: Modifier = Modifier,
     paywall: @Composable (Boolean, () -> Unit) -> Unit,
+    onOpenContentProtection: () -> Unit,
 ) {
     val globalVM = koinViewModel<MainViewModel>()
     val globalState by globalVM.state.collectAsStateWithLifecycle()
@@ -267,6 +268,7 @@ private fun EntryProviderScope<Routes>.settingsScreens(
             onNavigateToPaywall = { topLevelBackStack.add(Paywall) },
             onNavigateToChangelog = { topLevelBackStack.add(Changelog) },
             onNavigateToAppInfo = { topLevelBackStack.add(About) },
+            onNavigateToContentProtection = onOpenContentProtection,
         )
     }
 
