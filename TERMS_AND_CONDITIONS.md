@@ -19,9 +19,9 @@ Nexus Life is a personal organisation tool. It does not provide medical, mental 
 
 You are responsible for protecting your device and keeping copies of important exported backups. Data availability cannot be guaranteed after device loss, app removal, operating system changes or storage failure.
 
-## Notifications and device compatibility
+## Notifications, Charging Focus and device compatibility
 
-Reminder delivery and voice announcements depend on Android settings, battery restrictions, notification permissions and the speech voices installed on your device. Delivery cannot be guaranteed in every circumstance.
+Reminder delivery and Charging Focus prompts depend on Android settings, battery restrictions and notification permissions. Charging Focus shows a black screen only inside its own app screen; it does not lock the whole phone, block other apps or replace the phone's emergency features. Android navigation and system controls remain available. Voice announcements also depend on speech voices installed on your device. Delivery cannot be guaranteed in every circumstance.
 
 ## Open-source license
 
