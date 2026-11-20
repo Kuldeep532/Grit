@@ -1,7 +1,7 @@
 # Nexus Life Privacy Policy
 
 **Developed by:** Kuldeep Kumar Yadav  
-**Operated by:** Kuldeep Digital Services (an independent individual-operated name, not a registered company)
+**Project name:** Kuldeep Digital Services
 
 ## Information stored on your device
 
