@@ -42,6 +42,8 @@ import java.util.UUID
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
@@ -70,6 +72,7 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     }
 
     private val notificationManager by lazy { NotificationManagerCompat.from(context) }
+    private val speechMutex = Mutex()
 
     enum class ReminderKind {
         TASK,
@@ -78,8 +81,9 @@ class GritNotificationManager(private val context: Context) : AppNotificationMan
     }
 
     suspend fun announceReminder(title: String, kind: ReminderKind) {
-        withTimeout(7_000) {
-            withContext(Dispatchers.Main.immediate) {
+        speechMutex.withLock {
+            withTimeout(7_000) {
+                withContext(Dispatchers.Main.immediate) {
                 suspendCancellableCoroutine { continuation ->
                     var speechEngine: TextToSpeech? = null
                     val finished = AtomicBoolean(false)
