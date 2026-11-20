@@ -26,9 +26,9 @@ plugins {
     alias(libs.plugins.koin.compiler)
 }
 
-val appName = "Grit"
-val appVersionCode = 6500
-val appVersionName = "6.5.0"
+val appName = "Nexus Life"
+val appVersionCode = 6501
+val appVersionName = "6.5.1"
 
 val gitHash = execute("git", "rev-parse", "HEAD").take(7)
 
@@ -37,7 +37,7 @@ android {
     compileSdk { version = release(libs.versions.targetSdk.get().toInt()) { minorApiLevel = 2 } }
 
     defaultConfig {
-        applicationId = "com.shub39.grit"
+        applicationId = "com.kuldeep532.nexuslife"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = appVersionCode
