@@ -316,7 +316,7 @@ private fun EntryProviderScope<Routes>.settingsScreens(
             title = "Privacy Policy",
             onNavigateBack = { topLevelBackStack.removeLast() },
             sections = listOf(
-                "Who operates the app" to "Nexus Life is developed by Kuldeep Kumar Yadav and operated by Kuldeep Digital Services, an independent individual-operated name and not a registered company.",
+                "Who operates the app" to "Nexus Life is developed by Kuldeep Kumar Yadav and provided under the project name Kuldeep Digital Services.",
                 "Information stored on your device" to "Tasks, habits, reminders, preferences and related app content are stored locally on your device. Nexus Life does not require you to create an account. If you export a backup, the exported file is saved or shared only through the destination you choose.",
                 "Notifications, voice reminders and Charging Focus" to "If enabled, reminders and Charging Focus prompts are scheduled by Android on your device. Voice Announcements use Android's installed text-to-speech service and do not need microphone access. If you create a Charging Focus emergency PIN, the app stores a salted password hash on your device; it does not upload the PIN. Voice processing is handled by the speech service configured on your phone.",
                 "Analytics in the Google Play version" to "The Google Play version uses PostHog to record app usage events, app version, event time, subscription status and event-specific settings or action details to understand app usage and improve the experience. The free and open-source FOSS version does not send these analytics events. PostHog may process technical information according to its own privacy policy.",
@@ -335,7 +335,7 @@ private fun EntryProviderScope<Routes>.settingsScreens(
             onNavigateBack = { topLevelBackStack.removeLast() },
             sections = listOf(
                 "Acceptance" to "By installing or using Nexus Life, you agree to these terms. If you do not agree, please stop using the app.",
-                "Who provides Nexus Life" to "Nexus Life is developed by Kuldeep Kumar Yadav and operated by Kuldeep Digital Services as an independent individual-operated name. It is not represented as a registered company.",
+                "Who provides Nexus Life" to "Nexus Life is developed by Kuldeep Kumar Yadav and provided under the project name Kuldeep Digital Services.",
                 "Purpose of the app" to "Nexus Life provides tools for personal task planning, habit tracking, reminders, analytics and backup. You are responsible for the accuracy of the information you enter and for deciding how to use reminders and other features.",
                 "No professional advice" to "Nexus Life is a personal organisation tool. It does not provide medical, mental health, legal, financial or emergency services. Do not rely on it as a substitute for professional advice or urgent assistance.",
                 "Your data and backups" to "You are responsible for keeping your device secure and maintaining copies of important exported backups. The app cannot guarantee that data will remain available after device loss, app removal, operating system changes or storage failure.",
