@@ -67,7 +67,13 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
-fun About(\n    versionName: String,\n    onNavigateBack: () -> Unit,\n    onNavigateToPrivacy: () -> Unit,\n    onNavigateToTerms: () -> Unit,\n    modifier: Modifier = Modifier,\n) {
+fun About(
+    versionName: String,
+    onNavigateBack: () -> Unit,
+    onNavigateToPrivacy: () -> Unit,
+    onNavigateToTerms: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val uriHandler = LocalUriHandler.current
 
     var showLicenseBottomSheet by rememberSaveable { mutableStateOf(false) }
