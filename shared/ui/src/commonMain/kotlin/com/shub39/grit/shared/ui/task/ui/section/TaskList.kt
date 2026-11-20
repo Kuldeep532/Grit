@@ -575,33 +575,13 @@ private fun CompactTasksView(
                 state = lazyListState,
                 contentPadding = contentPadding,
                 blur = LazierBlur.Top,
-                verticalArrangement = Arrangement.spacedBy(2.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 itemsIndexed(items = reorderableTasks, key = { _, it -> it.task.id }) {
                     index,
                     taskWithSubTasks ->
                     ReorderableItem(reorderableListState, key = taskWithSubTasks.task.id) {
-                        val cardShape =
-                            when {
-                                reorderableTasks.size == 1 -> RoundedCornerShape(20.dp)
-                                index == 0 ->
-                                    RoundedCornerShape(
-                                        topStart = 20.dp,
-                                        topEnd = 20.dp,
-                                        bottomStart = 4.dp,
-                                        bottomEnd = 4.dp,
-                                    )
-
-                                index == reorderableTasks.size - 1 ->
-                                    RoundedCornerShape(
-                                        topStart = 4.dp,
-                                        topEnd = 4.dp,
-                                        bottomStart = 20.dp,
-                                        bottomEnd = 20.dp,
-                                    )
-
-                                else -> RoundedCornerShape(4.dp)
-                            }
+                        val cardShape = RoundedCornerShape(20.dp)
 
                         TaskCard(
                             taskWithSubTasks = taskWithSubTasks,
@@ -669,27 +649,7 @@ private fun CompactTasksView(
                         items = completedTasks,
                         key = { _, it -> "completed_task_${it.task.id}" },
                     ) { index, taskWithSubTasks ->
-                        val cardShape =
-                            when {
-                                completedTasks.size == 1 -> RoundedCornerShape(20.dp)
-                                index == 0 ->
-                                    RoundedCornerShape(
-                                        topStart = 20.dp,
-                                        topEnd = 20.dp,
-                                        bottomStart = 4.dp,
-                                        bottomEnd = 4.dp,
-                                    )
-
-                                index == completedTasks.size - 1 ->
-                                    RoundedCornerShape(
-                                        topStart = 4.dp,
-                                        topEnd = 4.dp,
-                                        bottomStart = 20.dp,
-                                        bottomEnd = 20.dp,
-                                    )
-
-                                else -> RoundedCornerShape(4.dp)
-                            }
+                        val cardShape = RoundedCornerShape(20.dp)
 
                         TaskCard(
                             taskWithSubTasks = taskWithSubTasks,
