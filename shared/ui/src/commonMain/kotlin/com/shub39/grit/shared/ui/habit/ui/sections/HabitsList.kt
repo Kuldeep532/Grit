@@ -257,8 +257,8 @@ private fun HabitsTopAppBar(
 ) {
     ExpressiveTopBar(
         modifier = modifier,
-        style = ExpressiveTopBarStyle.LargeFlexible,
-        titleAlignment = Alignment.Start,
+        style = ExpressiveTopBarStyle.CenterAligned,
+        titleAlignment = Alignment.CenterHorizontally,
         scrollBehavior = scrollBehavior,
         maxWidth = ContentMaxWidth,
         bottomContent = bottomContent,
