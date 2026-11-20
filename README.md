@@ -1,55 +1,36 @@
-![](fastlane/metadata/android/en-US/images/featureGraphic.png)
+# Nexus Life
 
-[<img alt="Get it on Google Play" src="badges/playstore.png" width="180px">](https://play.google.com/store/apps/details?id=com.shub39.grit)
-[<img alt="Get it on github" src="badges/github.png" width="180px">](https://github.com/shub39/Grit/releases)
+Nexus Life brings daily planning and habit tracking together in one focused Android app.
 
-# Screenshots
+## What it helps you do
 
-## Phone
-| ![Image 1](fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Image 2](fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) |
-|:-------------------------------------------------------------------------:|:-------------------------------------------------------------------------:|
-| ![Image 3](fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Image 4](fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
+- Organise daily tasks with categories, reminders and subtasks
+- Build simple or measurable habits
+- Track streaks, consistency and weekly progress
+- Use home-screen widgets for quick updates
+- Keep your information on your device and work offline
+- Export and restore your data
+- Use the full feature set without an account, advertisements or subscriptions
 
-## Tablets and Desktop
-| ![Image 1](fastlane/metadata/android/en-US/images/phoneScreenshots/7.png) | ![Image 2](fastlane/metadata/android/en-US/images/phoneScreenshots/8.png)  |
-|:-------------------------------------------------------------------------:|:--------------------------------------------------------------------------:|
-| ![Image 3](fastlane/metadata/android/en-US/images/phoneScreenshots/9.png) | ![Image 4](fastlane/metadata/android/en-US/images/phoneScreenshots/10.png) |
+## Android build
 
-Check out planned changes in [RoadMap](https://github.com/shub39/Grit/discussions/66)
+The Google Play release is built from the free and open-source `foss` variant.
 
-# Motivation 
-
-There are plenty of todo list and habit tracker apps for android. Some have the features I love 
-while some have good UI design. While learning android I made this app for myself that brings 
-together all the features that I like keeping everything simple. I eventually want to turn this app 
-into a productivity hub with many social features like progress sharing in the form of beautiful 
-cards.
-
-## Translations
-
-Translations are done via weblate, you can contribute there!
-[<img src="https://hosted.weblate.org/widget/grit/multi-auto.svg" alt="Translation status" />](https://hosted.weblate.org/engage/grit/)
-[<img src="https://hosted.weblate.org/widget/grit/287x66-grey.png" alt="Translation status" />](https://hosted.weblate.org/engage/grit/)
-
-# Inspiration and Tech used
-
-- [Loop Habit Tracker](https://github.com/iSoron/uhabits)
-- Kotlin and Jetpack Compose 🖤
-- Compose Multiplatform and Kotlin wasm for the Web Demo
-- [Compose Reorderable](https://github.com/Calvin-LL/Reorderable)
-- [MaterialKolor](https://github.com/jordond/MaterialKolor)
-- [ColorPicker Compose](https://github.com/skydoves/colorpicker-compose)
-- [Compose Calendar](https://github.com/boguszpawlowski/ComposeCalendar)
-- [Revenuecat Android SDK](https://github.com/RevenueCat/purchases-android)
-
-# Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for 
-submitting pull requests.
-
-# Security
-
-SHA-256 fingerprint for the signing certificate used for github releases
-```text
-0F:E1:B9:F4:4A:4D:B9:7E:C5:09:48:F5:18:9F:6B:43:00:71:6C:C6:D4:84:3F:56:98:D6:14:A2:15:2E:21:88
+```bash
+./gradlew :androidApp:assembleFossDebug
+./gradlew :androidApp:bundleFossRelease
 ```
+
+A signed release requires your own Android signing key.
+
+## Original project and license
+
+Nexus Life is an independently maintained derivative of [Grit](https://github.com/shub39/Grit), originally created by **Shubham Gorai**.
+
+The project retains the GNU General Public License v3.0. Original copyright notices and required license terms are preserved. Changes made in this repository are published under the same license.
+
+## Maintainer
+
+Kuldeep Kumar Yadav  
+[GitHub repository](https://github.com/Kuldeep532/Grit)
+
