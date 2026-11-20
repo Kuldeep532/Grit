@@ -55,7 +55,7 @@
     <string name="pause_notifications">Pause Notifications</string>
     <string name="pause_notifications_desc">Pause all app notifications</string>
     <string name="voice_announcements">Voice Announcements</string>
-    <string name="voice_announcements_desc">Speak task and habit reminders aloud in Hindi or English</string>
+    <string name="voice_announcements_desc">Speak reminders in your selected app language. Voice availability depends on your phone.</string>
     <string name="started_on">Started on</string>
     <string name="weekly_graph">Weekly Comparison</string>
     <string name="not_enough_data">Not enough data</string>
