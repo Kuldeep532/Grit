@@ -96,7 +96,7 @@ class ContentProtectionVpnService : VpnService() {
 
     private fun handleDnsPacket(packet: ByteArray): ByteArray? {
         if (packet.size < 28) return null
-        val ipVersion = (packet[0].toInt() ushr 4) and 0x0F
+        val ipVersion = ((packet[0].toInt() and 0xFF) ushr 4) and 0x0F
         if (ipVersion != 4) return null
         val ipHeaderLength = (packet[0].toInt() and 0x0F) * 4
         if (ipHeaderLength < 20 || packet.size < ipHeaderLength + 8) return null
