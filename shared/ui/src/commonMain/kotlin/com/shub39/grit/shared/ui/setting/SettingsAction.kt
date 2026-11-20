@@ -40,6 +40,8 @@ sealed interface SettingsAction {
 
     data class ChangeVoiceAnnouncements(val pref: Boolean) : SettingsAction
 
+    data class ChangeChargingFocus(val pref: Boolean) : SettingsAction
+
     data class ChangeReorderTasks(val pref: Boolean) : SettingsAction
 
     data class ChangeAppTheme(val appTheme: AppTheme) : SettingsAction
