@@ -407,7 +407,8 @@ private fun TaskListTopBar(
     bottomContent: @Composable () -> Unit,
 ) {
     ExpressiveTopBar(
-        style = ExpressiveTopBarStyle.LargeFlexible,
+        style = ExpressiveTopBarStyle.CenterAligned,
+        titleAlignment = Alignment.CenterHorizontally,
         scrollBehavior = scrollBehavior,
         bottomContent = bottomContent,
         title = { Text(text = stringResource(Res.string.tasks), fontFamily = flexFontEmphasis()) },
