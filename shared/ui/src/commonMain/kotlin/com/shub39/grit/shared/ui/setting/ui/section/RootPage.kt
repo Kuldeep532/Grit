@@ -159,6 +159,23 @@ fun RootPage(
                         )
 
                         ListItem(
+                            content = { Text(text = stringResource(Res.string.charging_focus)) },
+                            supportingContent = {
+                                Text(text = stringResource(Res.string.charging_focus_desc))
+                            },
+                            trailingContent = {
+                                ExpressiveSwitch(
+                                    checked = state.chargingFocus,
+                                    onCheckedChange = {
+                                        onAction(SettingsAction.ChangeChargingFocus(it))
+                                    },
+                                )
+                            },
+                            colors = listItemColors(),
+                            modifier = Modifier.clip(endItemShape()),
+                        )
+
+                        ListItem(
                             content = { Text(text = stringResource(Res.string.reorder_tasks)) },
                             supportingContent = {
                                 Text(text = stringResource(Res.string.reorder_tasks_desc))
