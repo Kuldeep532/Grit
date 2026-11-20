@@ -50,6 +50,8 @@ class ChargingFocusActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Remove PIN data saved by earlier Charging Focus versions; this mode is now voluntary.
+        getSharedPreferences("charging_focus_security", Context.MODE_PRIVATE).edit().clear().apply()
         val batteryStatus = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         if (batteryStatus?.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) == 0) {
             finish()
